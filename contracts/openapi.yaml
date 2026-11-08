@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: Minimal Notes API
+  version: 1.0.0
+  description: Contract-first Notes API for the Minimal Notes App.
+
+paths:
+  /api/notes:
+    get:
+      operationId: listNotes
+      summary: List all notes
+      responses:
+        "200":
+          description: Notes ordered by newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Note"
+    post:
+      operationId: createNote
+      summary: Create a note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNoteRequest"
+      responses:
+        "201":
+          description: Note created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Note"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+  /api/notes/{id}:
+    delete:
+      operationId: deleteNote
+      summary: Delete a note
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Note deleted
+        "404":
+          description: Note not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+components:
+  schemas:
+    CreateNoteRequest:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          minLength: 3
+          maxLength: 100
+          pattern: "^.*\\S.*$"
+          description: Note text; must contain at least one non-whitespace character.
+    Note:
+      type: object
+      required:
+        - id
+        - content
+        - createdAt
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ApiError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        message:
+          type: string
+          description: Human-readable error message

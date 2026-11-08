@@ -1,4 +1,4 @@
-package com.cariocaphil.notes;
+package com.cariocaphil.notes.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
