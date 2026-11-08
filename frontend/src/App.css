@@ -1,20 +1,53 @@
 .app {
   max-width: 40rem;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
-  text-align: center;
+  padding: 2rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .app h1 {
-  margin: 0 0 0.75rem;
-  font-size: 2.25rem;
+  margin: 0;
+  font-size: 2rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-.app p {
-  margin: 0;
+.app__subtitle {
+  margin: -1.25rem 0 0;
   color: #555;
-  font-size: 1.05rem;
-  line-height: 1.5;
+}
+
+.app h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.form-actions {
+  margin-top: 1rem;
+}
+
+.notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.notes-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.notes-list__item span {
+  flex: 1;
+  word-break: break-word;
 }
